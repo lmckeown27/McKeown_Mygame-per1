@@ -12,10 +12,10 @@
 
 '''
 My goal is:
-Able to kill enemies 
+Create walls
 
 My reach goal is:
-Create hit-points; damage 
+Enemies damage me
 
 '''
 
@@ -55,7 +55,8 @@ class Game:
         self.player = Player(self)
         self.plat1 = Platform(WIDTH, 50, 0, HEIGHT-50,
                               (150, 150, 150), "normal")
-        # self.plat1 = Platform(WIDTH, 50, 0, HEIGHT-50, (150,150,150), "normal")
+        # self.plat1 = Platform(WIDTH, 50, 0, HEIGHT-50,
+        # (150, 150, 150), "normal")
         self.all_sprites.add(self.plat1)
 
         self.platforms.add(self.plat1)
@@ -99,6 +100,12 @@ class Game:
                 elif hits[0].variant == "bouncey":
                     self.player.pos.y = hits[0].rect.top
                     self.player.vel.y = -PLAYER_JUMP
+                # creates a wall on the right
+                elif hits[0].variant == "right-wall":
+                    self.player.pos.x = hits[0].rect.left
+                # creates a wall on the left
+                elif hits[0].variant == "left-wall":
+                    self.player.pos.x = hits[0].rect.right
                 else:
                     self.player.pos.y = hits[0].rect.top
                     self.player.vel.y = 0
