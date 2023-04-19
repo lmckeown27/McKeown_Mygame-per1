@@ -67,10 +67,10 @@ class Game:
             p = Platform(*plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
-        for i in range(0, 10):
-            m = Mob(20, 20, (255, 255, 0))
-            self.all_sprites.add(m)
-            self.enemies.add(m)
+        # for i in range(0, 10):
+           # m = Mob(20, 20, (255, 255, 0))
+            # self.all_sprites.add(m)
+            # self.enemies.add(m)
         self.run()
 
     def run(self):
