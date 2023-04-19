@@ -1,4 +1,4 @@
-# File created by: Chris Cozort
+# File created by: Liam McKeown
 # Agenda:
 # gIT GITHUB
 # Build file and folder structures
@@ -6,16 +6,17 @@
 # testing github changes
 # I changed something - I changed something else tooooo!
 
-# This file was created by: Chris Cozort
+# This file was created by: Liam McKeown
 # Sources: http://kidscancode.org/blog/2016/08/pygame_1-1_getting-started/
 # Sources:
 
+# Goal: Get to the Gold block while avoiding the blocks that kill you
 '''
 My goal is:
-Create walls
+Create more platforms 
 
 My reach goal is:
-Enemies damage me
+Platforms can kill me 
 
 '''
 
@@ -67,7 +68,7 @@ class Game:
             self.all_sprites.add(p)
             self.platforms.add(p)
         for i in range(0, 10):
-            m = Mob(20, 20, (0, 255, 0))
+            m = Mob(20, 20, (255, 255, 0))
             self.all_sprites.add(m)
             self.enemies.add(m)
         self.run()
@@ -95,17 +96,14 @@ class Game:
         if self.player.vel.y > 0:
             hits = pg.sprite.spritecollide(self.player, self.platforms, False)
             if hits:
-                if hits[0].variant == "disappearing":
-                    hits[0].kill()
+                # labels every block tagged "death" to give the augmentation of PLAYER_DIE
+                if hits[0].variant == "death":
+                    # hits[0].kill()
+                    self.player.vel.x = PLAYER_DIE
+                # labels every block tagged "bouncey" to give the augmentation of PLAYER_JUMP
                 elif hits[0].variant == "bouncey":
                     self.player.pos.y = hits[0].rect.top
                     self.player.vel.y = -PLAYER_JUMP
-                # creates a wall on the right
-                elif hits[0].variant == "right-wall":
-                    self.player.pos.x = hits[0].rect.left
-                # creates a wall on the left
-                elif hits[0].variant == "left-wall":
-                    self.player.pos.x = hits[0].rect.right
                 else:
                     self.player.pos.y = hits[0].rect.top
                     self.player.vel.y = 0
