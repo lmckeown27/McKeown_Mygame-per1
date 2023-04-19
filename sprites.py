@@ -18,7 +18,7 @@ class Player(Sprite):
         self.image.fill(BLACK)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH/2, HEIGHT/2)
-        self.pos = vec(WIDTH/2, HEIGHT/2)
+        self.pos = vec(WIDTH-0.25, HEIGHT/2)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
         self.cofric = 0.1
@@ -86,7 +86,7 @@ class Mob(Sprite):
         self.width = width
         self.height = height
         self.image = pg.Surface((self.width, self.height))
-        self.color = color
+        self.color = BLUE
         self.image.fill(self.color)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH/2, HEIGHT/2)
@@ -116,6 +116,11 @@ class Mob(Sprite):
         # self.pos.y += self.vel.y
         self.pos += self.vel
         self.rect.center = self.pos
+
+    def player_collide(self):
+        hits = Player(Sprite)
+        if hits:
+            self.color = BLUE
 
 # create a new platform class...
 
